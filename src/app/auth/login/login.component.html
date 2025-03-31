@@ -1,4 +1,11 @@
-<p class="text-xs-center">Домашня бугалтерія</p>
+<p class="text-xs-center">Сторінка входу</p>
+<div
+  class="alert alert-{{message.type}}"
+     *ngIf="message.text"
+  >
+  {{message.text}}
+</div>
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div
     class="form-group"
@@ -16,8 +23,8 @@
       class="form-help-text"
       *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
     >
-      <span *ngIf="form.get('email')?.errors?.['required']">Email не може бути пустим.</span>
-      <span *ngIf="form.get('email')?.errors">Введіть коректний email.</span>
+      <span *ngIf="form.get('email')?.errors?.['required']">Email не може бути пустим. </span>
+      <span *ngIf="form.get('email')?.errors">Введіть коректний email. </span>
     </span>
   </div>
   <div
@@ -50,7 +57,7 @@
   </div>
   <div class="form-group">
     <p class="text-muted text-xs-center">
-      Немає акаунта? <a href="#">Зареєструватися!</a>
+      Немає акаунта? <a [routerLink]="'/registration'">Зареєструватися!</a>
     </p>
   </div>
 </form>
