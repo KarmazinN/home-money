@@ -1,12 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule }    from '@angular/platform-browser';
+import { NgModule }         from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth.module';
+import { AppComponent }     from './app.component';
+import { AuthModule }       from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
-import {UsersService} from './shared/services/users.service';
-import {HttpClientModule} from '@angular/common/http';
-import {AuthService} from "./shared/services/auth.service";
+import { UsersService}      from './shared/services/users.service';
+import { HttpClientModule}  from '@angular/common/http';
+import { AuthService}       from "./shared/services/auth.service";
+import { CoreModule }       from "./core/core.module";
 
 @NgModule({
   declarations: [
@@ -14,9 +15,10 @@ import {AuthService} from "./shared/services/auth.service";
   ],
   imports: [
     BrowserModule,
-    AuthModule,
     AppRoutingModule,
     HttpClientModule,
+    AuthModule,
+    CoreModule
   ],
   providers: [
     UsersService,

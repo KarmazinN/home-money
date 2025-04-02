@@ -1,11 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {AuthService} from "../../shared/services/auth.service";
+import {Component} from '@angular/core';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators}         from '@angular/forms';
+import {Router}       from "@angular/router";
+
+import {Observable}   from "rxjs";
+import {map}          from "rxjs/operators";
+
 import {UsersService} from "../../shared/services/users.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {User} from "../../shared/models/user.models";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import {User}         from "../../shared/models/user.models";
 
 @Component({
   selector: 'abc-registration',
@@ -19,7 +26,7 @@ export class RegistrationComponent {
 
   constructor(
       private _usersService : UsersService,
-      private _router: Router,
+      private _router       : Router,
   ) { }
 
 
@@ -31,21 +38,21 @@ export class RegistrationComponent {
           [this.forbiddenEmails()]
       ),
       'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      'name': new FormControl(null, Validators.required),
-      'agree': new FormControl(false, Validators.requiredTrue),
+      'name'    : new FormControl(null, Validators.required),
+      'agree'   : new FormControl(false, Validators.requiredTrue),
     })
   }
 
 
   onSubmit() {
     const formData = this.form.value;
-    const user = new User(formData.email, formData.password, formData.name);
+    const user          = new User(formData.email, formData.password, formData.name);
 
     this._usersService.createNewUser(user)
       .subscribe(() => {
         this._router.navigate(['/login'], {
           queryParams: {
-            email: user.email,
+            email      : user.email,
             nowCanLogin: true
           },
         });

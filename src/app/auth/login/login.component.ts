@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit}                  from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router}             from '@angular/router';
 
 import {UsersService} from '../../shared/services/users.service';
-import {AuthService} from '../../shared/services/auth.service'
+import {AuthService}  from '../../shared/services/auth.service'
 
-import {User} from '../../shared/models/user.models';
-import {Message} from '../../shared/models/message.model';
+import {User}         from '../../shared/models/user.models';
+import {Message}      from '../../shared/models/message.model';
 
 
 @Component({
@@ -62,13 +62,13 @@ export class LoginComponent implements OnInit {
             this.message.text = '';
             window.localStorage.setItem('user', JSON.stringify(user));
             this._authService.login()
-            this._router.navigate(['/']);
+            this._router.navigate(['/core', 'bill']);
           }
           else {
             this.showMessage('Пароль не правильний');
           }
         } else {
-          this.showMessage('Користувача не знайдено');
+            this.showMessage('Користувача не знайдено');
         }
       });
   }
